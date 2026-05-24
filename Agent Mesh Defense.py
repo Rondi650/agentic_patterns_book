@@ -24,7 +24,8 @@ class FirewallAgent:
         print(policy)
         print(f"FIREWALL: Validating message from '{message.sender}' "
               f"to '{message.recipient}' with action '{message.action}'.")
-        print(policy["allowed_senders"])
+        if policy:
+            print(policy.get("allowed_senders", []))
 
         # If there's no specific policy, we can default to allow or deny.
         # Here, we default to allow if no policy is found.
@@ -39,7 +40,7 @@ class FirewallAgent:
                 f"to '{message.recipient}'."
             )
             # In a real system, this would trigger a formal security alert.
-            return False
+            return False 
 
         print(
             f"FIREWALL: Allowed message from '{message.sender}' "
